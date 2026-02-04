@@ -1,16 +1,16 @@
 """
-13_production_concerns.py - 本番環境での懸念事項
+13_production_concerns.py - Production Environment Concerns
 
-目的: 本番運用に必要な機能の検証
-- 監査ログ: 実行履歴の保存・参照方法
-- トークン消費: コスト可視化
-- Observability: トレース機能
-- 並列実行: 複数Crewの並列処理
-- エラーハンドリング: グレースフルな失敗処理
+Purpose: Verify features required for production operation
+- Audit logging: How to save and retrieve execution history
+- Token consumption: Cost visibility
+- Observability: Tracing features
+- Parallel execution: Parallel processing of multiple Crews
+- Error handling: Graceful failure handling
 
-LangGraph比較:
-- LangGraph: LangSmith連携、明示的なstate管理
-- CrewAI: 組み込み機能 + Enterprise版での拡張
+LangGraph Comparison:
+- LangGraph: LangSmith integration, explicit state management
+- CrewAI: Built-in features + Enterprise edition extensions
 """
 
 import asyncio

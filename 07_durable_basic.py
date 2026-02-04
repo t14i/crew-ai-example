@@ -1,14 +1,14 @@
 """
-07_durable_basic.py - Durable Execution 基本
+07_durable_basic.py - Durable Execution Basics
 
-目的: CrewAI Flow での状態管理の検証
-- Flow の基本的な使い方
-- @start, @listen によるステップ連携
-- 状態管理
+Purpose: Verify state management in CrewAI Flow
+- Basic usage of Flow
+- Step chaining with @start, @listen
+- State management
 
-LangGraph比較:
-- LangGraph: Checkpointer (Memory/SQLite/Postgres) を明示的に設定
-- CrewAI: Flow + Pydantic state で状態管理
+LangGraph Comparison:
+- LangGraph: Explicitly configure Checkpointer (Memory/SQLite/Postgres)
+- CrewAI: State management with Flow + Pydantic state
 """
 
 from datetime import datetime
@@ -18,7 +18,7 @@ from crewai.flow.flow import Flow, listen, start
 from pydantic import BaseModel
 
 
-# 永続化用のDB設定
+# DB configuration for persistence
 DB_PATH = Path("./db")
 DB_PATH.mkdir(exist_ok=True)
 

@@ -1,14 +1,14 @@
 """
-05_hitl_task_input.py - Task単位のHuman-in-the-Loop
+05_hitl_task_input.py - Task-level Human-in-the-Loop
 
-目的: human_input=True によるHITL機能の検証
-- human_input=True の挙動
-- 入力待ち状態の確認
-- フィードバック後の継続
+Purpose: Verify HITL functionality with human_input=True
+- Behavior of human_input=True
+- Verify waiting state for input
+- Continuation after feedback
 
-LangGraph比較:
-- LangGraph: interrupt() で任意のポイントで中断可能
-- CrewAI: Task単位でのhuman_inputフラグ（よりシンプル）
+LangGraph Comparison:
+- LangGraph: interrupt() allows interruption at any point
+- CrewAI: human_input flag at task level (simpler)
 """
 
 from crewai import Agent, Task, Crew

@@ -1,14 +1,14 @@
 """
-09_collaboration_delegation.py - Agent間委譲
+09_collaboration_delegation.py - Inter-Agent Delegation
 
-目的: CrewAI のエージェント委譲機能を検証
-- allow_delegation=True の挙動
-- 委譲の発火条件
-- 委譲先の選択ロジック
+Purpose: Verify CrewAI's agent delegation feature
+- Behavior of allow_delegation=True
+- Delegation trigger conditions
+- Delegation target selection logic
 
-CrewAI固有機能:
-- LangGraphには組み込みの委譲機能はない
-- LangGraphでは明示的なルーティングで実装する必要がある
+CrewAI-specific feature:
+- LangGraph has no built-in delegation feature
+- LangGraph requires explicit routing implementation
 """
 
 from crewai import Agent, Task, Crew, Process

@@ -1,14 +1,14 @@
 """
-02_tool_definition.py - Tool定義方法の比較
+02_tool_definition.py - Comparing Tool Definition Methods
 
-目的: CrewAIでのTool定義方法を検証
-- @tool デコレータ（シンプル）
+Purpose: Verify tool definition methods in CrewAI
+- @tool decorator (simple)
 - @tool with type hints
-- BaseTool クラス継承（Pydantic args_schema使用可能）
+- BaseTool class inheritance (supports Pydantic args_schema)
 
-LangGraph比較:
-- @tool decorator → ほぼ同等
-- Pydantic連携 → BaseToolで利用可能
+LangGraph Comparison:
+- @tool decorator -> nearly equivalent
+- Pydantic integration -> available via BaseTool
 """
 
 from typing import Type
@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 
 
 # =============================================================================
-# 方法1: @tool デコレータ（最もシンプル）
+# Method 1: @tool decorator (simplest)
 # =============================================================================
 @tool("Simple Calculator")
 def simple_calculator(operation: str, a: float, b: float) -> str:
@@ -42,7 +42,7 @@ def simple_calculator(operation: str, a: float, b: float) -> str:
 
 
 # =============================================================================
-# 方法2: @tool with type hints (CrewAIではargs_schemaは非サポート)
+# Method 2: @tool with type hints (args_schema not supported in CrewAI)
 # =============================================================================
 @tool("Weather Lookup")
 def weather_lookup(city: str, unit: str = "celsius") -> str:
@@ -71,7 +71,7 @@ def weather_lookup(city: str, unit: str = "celsius") -> str:
 
 
 # =============================================================================
-# 方法3: BaseTool クラス継承（最も柔軟）
+# Method 3: BaseTool class inheritance (most flexible)
 # =============================================================================
 class DatabaseQueryInput(BaseModel):
     """Input schema for database query tool."""
@@ -116,14 +116,14 @@ class DatabaseQueryTool(BaseTool):
 
 
 def main():
-    # 全ツールをインスタンス化
+    # Instantiate all tools
     tools = [
         simple_calculator,
         weather_lookup,
         DatabaseQueryTool(),
     ]
 
-    # ツール情報を表示
+    # Display tool information
     print("=" * 60)
     print("Tool Definition Comparison")
     print("=" * 60)

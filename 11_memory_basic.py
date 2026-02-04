@@ -1,14 +1,14 @@
 """
-11_memory_basic.py - Memory基本機能
+11_memory_basic.py - Basic Memory Functionality
 
-目的: CrewAI のメモリ機能を検証
-- memory=True で何が保存されるか
-- Short-term memory の挙動
-- 同一セッション内での記憶
+Purpose: Verify CrewAI's memory feature
+- What gets saved with memory=True
+- Behavior of short-term memory
+- Memory within the same session
 
-LangGraph比較:
-- LangGraph: State で明示的にメモリ管理
-- CrewAI: memory=True で自動的にメモリ有効化
+LangGraph Comparison:
+- LangGraph: Explicit memory management in State
+- CrewAI: Automatic memory enablement with memory=True
 """
 
 from crewai import Agent, Task, Crew

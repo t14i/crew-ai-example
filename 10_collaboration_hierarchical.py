@@ -1,14 +1,14 @@
 """
 10_collaboration_hierarchical.py - Hierarchical Process
 
-目的: CrewAI の階層的プロセスを検証
-- Process.hierarchical の挙動
-- マネージャーエージェントの自動生成
-- タスク割り当ての動的決定
+Purpose: Verify CrewAI's hierarchical process
+- Behavior of Process.hierarchical
+- Automatic manager agent generation
+- Dynamic task assignment
 
-CrewAI固有機能:
-- LangGraphには組み込みの階層プロセスはない
-- LangGraphではsupervisorパターンを自分で実装する必要がある
+CrewAI-specific feature:
+- LangGraph has no built-in hierarchical process
+- LangGraph requires manual supervisor pattern implementation
 """
 
 from crewai import Agent, Task, Crew, Process

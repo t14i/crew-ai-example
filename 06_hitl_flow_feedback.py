@@ -1,16 +1,16 @@
 """
-06_hitl_flow_feedback.py - Flow での Human Feedback
+06_hitl_flow_feedback.py - Human Feedback in Flow
 
-目的: CrewAI Flow での HITL 機能の検証
-- Flowの状態遷移
-- approve/reject の分岐
-- 人間のフィードバックループ
+Purpose: Verify HITL functionality in CrewAI Flow
+- Flow state transitions
+- approve/reject branching
+- Human feedback loop
 
-LangGraph比較:
-- LangGraph: Command(resume=) でワークフロー再開
-- CrewAI Flow: @start, @listen, @router でワークフロー構築
+LangGraph Comparison:
+- LangGraph: Command(resume=) to resume workflow
+- CrewAI Flow: Build workflow with @start, @listen, @router
 
-注意: CrewAI Flowは比較的新しい機能で、APIが変更される可能性があります
+Note: CrewAI Flow is a relatively new feature, API may change
 """
 
 from crewai.flow.flow import Flow, listen, start, router
@@ -20,7 +20,7 @@ from pydantic import BaseModel
 class ProposalState(BaseModel):
     """State for the proposal workflow."""
 
-    topic: str = "AI Agent Framework Adoption"  # デフォルト値を設定
+    topic: str = "AI Agent Framework Adoption"  # Set default value
     draft: str = ""
     feedback: str = ""
     status: str = "pending"  # pending, approved, rejected, revised

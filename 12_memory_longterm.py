@@ -1,18 +1,18 @@
 """
 12_memory_longterm.py - Long-term Memory
 
-目的: CrewAI の長期メモリ機能を検証
-- Long-term memory の永続化
-- セッション跨ぎでの記憶保持
-- Entity memory の効果
+Purpose: Verify CrewAI's long-term memory feature
+- Long-term memory persistence
+- Memory retention across sessions
+- Effect of entity memory
 
-使い方:
-1. 最初の実行: python 12_memory_longterm.py --session 1
-2. 2回目の実行: python 12_memory_longterm.py --session 2
+Usage:
+1. First run: python 12_memory_longterm.py --session 1
+2. Second run: python 12_memory_longterm.py --session 2
 
-LangGraph比較:
-- LangGraph: Checkpointer でメモリを永続化
-- CrewAI: memory=True + long_term_memory=True で自動永続化
+LangGraph Comparison:
+- LangGraph: Persist memory with Checkpointer
+- CrewAI: Automatic persistence with memory=True + long_term_memory=True
 """
 
 import argparse

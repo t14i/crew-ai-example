@@ -1,14 +1,14 @@
 """
-04_tool_error_handling.py - ツールエラーハンドリング
+04_tool_error_handling.py - Tool Error Handling
 
-目的: ツール実行時のエラー処理を検証
-- Tool内で例外発生時の挙動
-- Agentがリトライするか
-- エラーメッセージの伝達
+Purpose: Verify error handling during tool execution
+- Behavior when exceptions occur inside tools
+- Whether agent retries
+- Error message propagation
 
-LangGraph比較:
-- LangGraph: handle_tool_errors=True でエラーを結果として返す
-- CrewAI: エラーは自動的にエージェントに伝達される
+LangGraph Comparison:
+- LangGraph: handle_tool_errors=True returns errors as results
+- CrewAI: Errors are automatically propagated to the agent
 """
 
 from typing import Type
@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 
 
 # =============================================================================
-# 例外を投げるツール
+# Tool that throws exceptions
 # =============================================================================
 @tool("Failing Tool")
 def failing_tool(should_fail: bool = True) -> str:
@@ -35,7 +35,7 @@ def failing_tool(should_fail: bool = True) -> str:
 
 
 # =============================================================================
-# 条件付きで失敗するツール（リトライテスト用）
+# Tool that conditionally fails (for retry testing)
 # =============================================================================
 call_counter = {"count": 0}
 
@@ -59,7 +59,7 @@ def flaky_tool(operation: str) -> str:
 
 
 # =============================================================================
-# エラーを返すツール（例外ではなくエラーメッセージ）
+# Tool that returns errors (error message instead of exception)
 # =============================================================================
 class DivisionInput(BaseModel):
     """Input for division tool."""
@@ -86,7 +86,7 @@ class SafeDivisionTool(BaseTool):
 
 
 # =============================================================================
-# 入力バリデーションエラーを起こすツール
+# Tool that causes input validation errors
 # =============================================================================
 class StrictInput(BaseModel):
     """Strict input validation."""

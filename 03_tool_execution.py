@@ -1,14 +1,14 @@
 """
-03_tool_execution.py - Tool実行の検証
+03_tool_execution.py - Tool Execution Verification
 
-目的: Tool実行メカニズムの検証
-- カスタムTool実行
-- 複数回呼び出しの挙動
-- 実行時間の計測
+Purpose: Verify tool execution mechanism
+- Custom tool execution
+- Behavior of multiple invocations
+- Execution time measurement
 
-LangGraph比較:
-- 両フレームワークとも@toolデコレータでツール定義可能
-- CrewAIはエージェントがツール使用を自律的に決定
+LangGraph Comparison:
+- Both frameworks support @tool decorator for tool definition
+- CrewAI agents autonomously decide when to use tools
 """
 
 import time
@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field
 
 
 # =============================================================================
-# シンプルなツール
+# Simple tool
 # =============================================================================
 @tool("Timestamp Generator")
 def get_timestamp() -> str:
@@ -32,7 +32,7 @@ def get_timestamp() -> str:
 
 
 # =============================================================================
-# 遅いAPIをシミュレートするツール
+# Tool that simulates a slow API
 # =============================================================================
 @tool("Slow API Call")
 def slow_api_call(query: str) -> str:
@@ -48,7 +48,7 @@ def slow_api_call(query: str) -> str:
 
 
 # =============================================================================
-# 複数の引数を持つツール
+# Tool with multiple arguments
 # =============================================================================
 class SearchInput(BaseModel):
     """Input for search tool."""

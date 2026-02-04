@@ -1,18 +1,18 @@
 """
-08_durable_resume.py - Durable Execution 再開テスト
+08_durable_resume.py - Durable Execution Resume Test
 
-目的: 中断したワークフローの再開機能を検証
-- プロセス再起動後の復旧
-- 中断ポイントからの再開
-- 状態の整合性
+Purpose: Verify resume functionality for interrupted workflows
+- Recovery after process restart
+- Resume from interruption point
+- State consistency
 
-LangGraph比較:
-- LangGraph: thread_id でチェックポイントを特定
-- CrewAI: Flow state ID / method_name で再開
+LangGraph Comparison:
+- LangGraph: Identify checkpoint by thread_id
+- CrewAI: Resume by Flow state ID / method_name
 
-使い方:
-1. 最初に実行: python 08_durable_resume.py --start
-2. 中断後に再開: python 08_durable_resume.py --resume <flow_id>
+Usage:
+1. First run: python 08_durable_resume.py --start
+2. Resume after interruption: python 08_durable_resume.py --resume <flow_id>
 """
 
 import argparse
@@ -26,7 +26,7 @@ from crewai.flow.flow import Flow, listen, start
 from pydantic import BaseModel
 
 
-# ステート保存用のファイルパス（シンプルな永続化のデモ用）
+# File path for state persistence (for simple persistence demo)
 STATE_FILE = Path("./db/resume_state.json")
 STATE_FILE.parent.mkdir(exist_ok=True)
 
