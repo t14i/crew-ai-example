@@ -150,17 +150,28 @@ class MyFlow(Flow[MyState]):
 
 #### 4.2 Resume Functionality (08_durable_resume.py)
 
-**Rating**: ⭐⭐⭐
-- Manual checkpoint/resume is possible
-- Built-in @persist behavior is version-dependent
+**Rating**: ⭐⭐⭐⭐
+- `@persist` with `SQLiteFlowPersistence` enables durable execution
+- Resume by passing state ID via `kickoff(inputs={'id': state_id})`
+- State automatically restored when same ID is provided
+
+**Key Discovery**:
+```python
+@persist(persistence=SQLiteFlowPersistence(db_path="./db/flow.db"))
+class MyFlow(Flow[MyState]):
+    ...
+
+# Resume with:
+flow.kickoff(inputs={'id': 'previous-state-id'})
+```
 
 **LangGraph Comparison**:
 | Item | CrewAI | LangGraph |
 |------|--------|-----------|
-| Persistence Method | Manual / @persist | Checkpointer |
+| Persistence Method | @persist + SQLite | Checkpointer |
+| Resume Method | `kickoff(inputs={'id': ...})` | `thread_id` config |
+| Auto State Load | ✅ Yes | ✅ Yes |
 | Setup Difficulty | Medium | Medium |
-| Flexibility | Medium | High |
-| Resume Identifier | Flow state | thread_id |
 
 ---
 
@@ -344,8 +355,9 @@ class AuditLogger:
    - Will fail without manager configuration
 
 4. **@persist decorator**:
-   - Behavior varies by version
-   - Consider manual checkpointing for reliability
+   - Use `@persist(persistence=SQLiteFlowPersistence(...))` for file-based persistence
+   - Resume with `kickoff(inputs={'id': state_id})` - this triggers automatic state restoration
+   - Each method should check state to skip completed work
 
 ---
 

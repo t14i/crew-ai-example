@@ -150,17 +150,28 @@ class MyFlow(Flow[MyState]):
 
 #### 4.2 再開機能 (08_durable_resume.py)
 
-**評価**: ⭐⭐⭐
-- 手動チェックポイント/再開は可能
-- ビルトイン @persist の挙動はバージョン依存
+**評価**: ⭐⭐⭐⭐
+- `@persist` と `SQLiteFlowPersistence` で永続的な実行が可能
+- `kickoff(inputs={'id': state_id})` で状態IDを渡して再開
+- 同じIDを渡すと状態が自動的に復元される
+
+**重要な発見**:
+```python
+@persist(persistence=SQLiteFlowPersistence(db_path="./db/flow.db"))
+class MyFlow(Flow[MyState]):
+    ...
+
+# 再開時:
+flow.kickoff(inputs={'id': '前回のstate_id'})
+```
 
 **LangGraph比較**:
 | 項目 | CrewAI | LangGraph |
 |------|--------|-----------|
-| 永続化方法 | 手動 / @persist | Checkpointer |
+| 永続化方法 | @persist + SQLite | Checkpointer |
+| 再開方法 | `kickoff(inputs={'id': ...})` | `thread_id` 設定 |
+| 自動状態ロード | ✅ あり | ✅ あり |
 | 設定難易度 | 中 | 中 |
-| 柔軟性 | 中 | 高 |
-| 再開識別子 | Flow state | thread_id |
 
 ---
 
@@ -344,8 +355,9 @@ class AuditLogger:
    - マネージャー設定なしでは失敗する
 
 4. **@persist デコレータ**:
-   - バージョンにより挙動が異なる
-   - 信頼性のために手動チェックポイントを検討
+   - `@persist(persistence=SQLiteFlowPersistence(...))` でファイル永続化
+   - `kickoff(inputs={'id': state_id})` で再開 - 状態が自動復元される
+   - 各メソッドで状態をチェックして完了済み処理をスキップ
 
 ---
 

@@ -53,9 +53,9 @@ uv run --env-file .env python 01_quickstart.py
   - Notification system
 
 ### Durable Execution
-- `@persist` decorator for Flow-based workflows
-- SQLite storage by default
-- Resume from interruption is possible
+- `@persist(persistence=SQLiteFlowPersistence(...))` for Flow-based workflows
+- Resume with `kickoff(inputs={'id': state_id})` - triggers automatic state restoration
+- Each method should check state to skip completed work
 - Less explicit control than LangGraph's Checkpointer
 
 ### Role-Based Collaboration (CrewAI-specific)
@@ -74,6 +74,6 @@ uv run --env-file .env python 01_quickstart.py
 1. `@tool` does NOT support `args_schema` or `cache=True` parameters
 2. `@listen` requires method reference, not string: `@listen(step1)` not `@listen("step1")`
 3. `Process.hierarchical` requires `manager_llm` or `manager_agent`
-4. `@persist` behavior varies by version - consider manual checkpointing
+4. `@persist` requires `kickoff(inputs={'id': ...})` to resume - state is auto-restored with same ID
 
 See [REPORT.md](./REPORT.md) for details.
